@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-domain="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EngiMind AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="veil"></div>
+<div class="app" id="app">
+  <aside class="side" id="side" aria-label="Primary">
+    <div class="brand"><span class="logo"></span><b>EngiMind <i>AI</i></b>
+      <button class="ico" id="collapse" aria-label="Collapse sidebar">‹</button></div>
+    <nav>
+      <button class="nav on" data-go="work"><span>＋</span><em>New engineering task</em></button>
+      <button class="nav" data-go="domains"><span>◈</span><em>Engineering domains</em></button>
+      <button class="nav" data-go="viz"><span>△</span><em>Visualization</em></button>
+      <button class="nav" data-go="settings"><span>⚙</span><em>Settings</em></button>
+    </nav>
+    <div class="recent"><h4>Saved analyses</h4><ul id="saved"></ul></div>
+    <div class="profile"><span class="av">E</span><em>Engineer<br><small>Local workspace</small></em></div>
+  </aside>
+  <main>
+    <header class="top"><button class="ico mob" id="menu" aria-label="Open menu">☰</button>
+      <div><h1>Engineering workspace</h1><p id="agentLine">Orchestrator selects the specialist · <span id="apiStatus">Checking backend…</span></p></div></header>
+
+    <section id="work" class="panel">
+      <div class="cards" id="domains" role="radiogroup" aria-label="Engineering domain"></div>
+      <div class="glass task">
+        <div class="agent" id="agentBox"></div>
+        <label for="task" class="sr">Engineering task</label>
+        <textarea id="task" rows="4" placeholder="Describe the engineering task, with known loads, dimensions, codes and constraints…"></textarea>
+        <div class="chips" id="chips"></div>
+        <div class="row"><small>Missing inputs are listed in the result instead of being guessed.</small>
+          <button class="go" id="run">Analyze</button></div>
+      </div>
+
+      <div class="glass flow" aria-label="Agent pipeline">
+        <div class="st" data-s="task">User task</div><i></i>
+        <div class="st" data-s="orch">Orchestrator</div><i></i>
+        <div class="spec" id="specs"></div><i></i>
+        <div class="st" data-s="val">Validation</div><i></i>
+        <div class="st" data-s="rep">Final report</div>
+        <p id="flowNote">Stages light up only when the backend reports them.</p>
+      </div>
+
+      <div class="glass out" id="out" hidden>
+        <div class="bar"><b id="outTitle">Result</b>
+          <span><button class="sm" id="copy">Copy result</button><button class="sm" id="exp">Export report</button><button class="sm" id="save">Save locally</button><button class="sm" id="again">New analysis</button></span></div>
+        <div class="warn" role="note">Professional review required. Verify every value, equation and code reference before design use or construction.</div>
+        <div id="body"></div>
+      </div>
+      <div class="glass empty" id="empty"><b>No analysis yet</b><span>Choose a domain, describe the task and select Analyze.</span></div>
+    </section>
+
+    <section id="viz" class="panel glass">
+      <h2>Visualization area</h2>
+      <div class="tabs"><span>3D building</span><span>Structural model</span><span>Circuit diagram</span><span>Assembly</span><span>Charts</span></div>
+      <div class="empty inner"><b>No model connected</b><span>Reserved for backend-generated geometry and results. Nothing is simulated here.</span></div>
+    </section>
+
+    <section id="settings" class="panel glass">
+      <h2>Settings</h2>
+      <label>Analyze endpoint <input id="ep" spellcheck="false"></label>
+      <small>Only the URL lives here. API keys stay in the backend .env file.</small><p id="healthDetail" class="tabs">Checking API connection…</p>
+    </section>
+  </main>
+</div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
